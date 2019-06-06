@@ -12,3 +12,5 @@
 - All files had 0-padded mm/dd/yyy dates except 2016-01, which dropped leading 0's.
 - Quarters 2015-07, 2015-01 and all 2014 are missing.
 
+[open-data-portal]: https://data.nashville.gov/General-Government/General-Government-Employees-Demographics/4ibi-mxs4
+
