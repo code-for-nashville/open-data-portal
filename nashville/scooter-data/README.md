@@ -58,13 +58,14 @@ import sqlite3
 
 def main():
 
-    lime = {'company':'lime','endpoint':'https://data.nashville.gov/resource/ntar-zcjt','color':'lime','timezone':'UTC'}
-    bird = {'company': 'bird','endpoint':'https://data.nashville.gov/resource/nar3-8j89','color': 'black','timezone':'UTC'}
-    uber = {'company':'uber','endpoint':'https://data.nashville.gov/resource/jwwr-v4rf','color': 'red','timezone':'UTC'}
-    lyft = {'company':'lyft','endpoint':'https://data.nashville.gov/resource/bmb2-fucd', 'color': 'pink','timezone':'UTC'}
-    gotcha = {'company': 'gotcha','endpoint':'https://data.nashville.gov/resource/anqi-zsnc','color': 'aqua','timezone':'UTC'}
-    spin = {'company':'spin','endpoint':'https://data.nashville.gov/resource/2gne-qgxz','color': 'orange','timezone':'UTC'}
-    bolt = {'company':'bolt','endpoint':'https://data.nashville.gov/resource/rxpd-ez2h','color': 'yellow','timezone':'UTC'}
+    lime = {'company':'lime','endpoint':'https://data.nashville.gov/resource/ntar-zcjt.json?','color':'lime','timezone':'UTC'}
+    bird = {'company': 'bird','endpoint':'https://data.nashville.gov/resource/nar3-8j89.json?','color': 'black','timezone':'UTC'}
+    uber = {'company':'uber','endpoint':'https://data.nashville.gov/resource/jwwr-v4rf.json?','color': 'red','timezone':'UTC'}
+    lyft = {'company':'lyft','endpoint':'https://data.nashville.gov/resource/bmb2-fucd.json?', 'color': 'pink','timezone':'UTC'}
+    gotcha = {'company': 'gotcha','endpoint':'https://data.nashville.gov/resource/anqi-zsnc.json?','color': 'aqua','timezone':'UTC'}
+    spin = {'company':'spin','endpoint':'https://data.nashville.gov/resource/2gne-qgxz.json?','color': 'orange','timezone':'UTC'}
+    bolt = {'company':'bolt','endpoint':'https://data.nashville.gov/resource/rxpd-ez2h.json?','color': 'yellow','timezone':'UTC'}
+
 
     # bolt data lat and long is inaccurate
     scooter_companies = [lime, bird, uber, lyft, gotcha, spin, bolt]
