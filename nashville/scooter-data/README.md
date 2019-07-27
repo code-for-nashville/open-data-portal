@@ -41,45 +41,9 @@ conn.close()
 This data represents 15 minute extracts from https://data.nashville.gov 
 * Some times may not exists due to extraction errors
 
-To make the data more intuitive to work with, I'm capturing time values in two timezones: CST and UTC.
-There are two values of primary interest.
-1. __Extraction__ dates and times. I'm capturing both UTC and CST timezones
-1. __Availability__ start and end times. The timezone for the original data is UTC, so I included a calculation to convert this time to CST to ease analysis later.
-
-```python
-from datetime import datetime
-from pytz import timezone
-
-utc = timezone('UTC')
-central = timezone('US/Central')
-
-extract_date = datetime.strftime(datetime.now(),'%Y-%m-%d')
-extract_time = datetime.strftime(datetime.now(),'%H:%M:%S')
-
-cst_extract_date_time = datetime.strptime(extract_date + ' ' + extract_time, '%Y-%m-%d %H:%M:%S')
-cst_extract_date_time = cst_extract_date_time.astimezone(central)
-cst_extract_date = str(datetime.strftime(cst_extract_date_time,'%Y-%m-%d'))
-cst_extract_time = str(datetime.strftime(cst_extract_date_time,'%H:%M:%S'))
-
-utc_extract_date_time = datetime.strptime(extract_date + ' ' + extract_time, '%Y-%m-%d %H:%M:%S')
-utc_extract_date_time = utc_extract_date_time.astimezone(utc)
-utc_extract_date = str(datetime.strftime(utc_extract_date_time,'%Y-%m-%d'))
-utc_extract_time = str(datetime.strftime(utc_extract_date_time,'%H:%M:%S'))
-
-# Availability start date and time conversion to cst
-df['date_time'] = df['availability_start_date'] + ' ' + df['availability_start_time']
-df['date_time'] = df.apply(lambda x: datetime.strptime(x['date_time'], '%Y-%m-%d %H:%M:%S'),axis=1)
-df['utc_time'] = df.apply(lambda x: utc.localize(x['date_time']),axis=1)
-df['central_time'] = df.apply(lambda x: x['utc_time'].astimezone(central),axis=1)
-
-df['availability_start_date_cst'] = df.apply(lambda x: str(datetime.strftime(x['central_time'],'%Y-%m-%d')),axis=1)
-df['availability_start_time_cst'] = df.apply(lambda x: str(datetime.strftime(x['central_time'],'%H:%M:%S')),axis=1)
-        
-```
-## Full Extraction Script
+### Extraction Script
 The script below uses an app_token per https://dev.socrata.com/consumers/getting-started.html. However, 
 you can make a certain number of requests without an application token. 
-
 
 
 ```python
