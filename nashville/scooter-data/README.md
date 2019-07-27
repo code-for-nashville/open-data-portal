@@ -45,5 +45,9 @@ This data represents 15 minute extracts from https://data.nashville.gov
 The script below uses an app_token per https://dev.socrata.com/consumers/getting-started.html. However, 
 you can make a certain number of requests without an application token. 
 
-You can run it from this directory with `python ./script/extract`
+It is recommended that you install dependencies with [Pipenv](https://docs.pipenv.org/en/latest/).
+You can run it from this directory with `python ./script/extract`.
+
+This will extract current data into a scooters.db sqlite database.
+From there, you could you use it via python or sqlite.
 
