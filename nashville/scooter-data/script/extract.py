@@ -54,8 +54,8 @@ def main():
         endpoint = scooter['endpoint']
         color = scooter['color']
 
-        app_token = '.json?' #add $$app_token=APPTOKEN
-        url = endpoint + app_token
+        # app_token = '.json?' #add $$app_token=APPTOKEN
+        url = endpoint # + app_token
 
         response = requests.get(url)
 
