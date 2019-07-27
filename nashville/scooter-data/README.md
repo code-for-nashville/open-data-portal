@@ -41,7 +41,7 @@ conn.close()
 This data represents 15 minute extracts from https://data.nashville.gov 
 * Some times may not exists due to extraction errors
 
-### Extraction Script
+### Extaction Script
 The script below uses an app_token per https://dev.socrata.com/consumers/getting-started.html. However, 
 you can make a certain number of requests without an application token. 
 
@@ -95,7 +95,7 @@ def main():
         endpoint = scooter['endpoint']
         color = scooter['color']
         
-        app_token = '' #$$app_token=APPTOKEN
+        app_token = '.json?' #add $$app_token=APPTOKEN
         url = endpoint + app_token
 
         response = requests.get(url)
