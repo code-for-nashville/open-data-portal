@@ -24,6 +24,9 @@ CSV columns:
 - 'extract_date_utc': Modified, extract_date UTC
 - 'extract_time_utc': Modified, extract_time UTC
 
+### Concerns
+- some data appears missing from some days of data (e.g. 2019-07-24 and 2019-08-05)
+
 ## Sample Import Script
 
 ```python
