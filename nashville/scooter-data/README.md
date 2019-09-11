@@ -60,7 +60,7 @@ From there, you could you use it via python or sqlite.
 # Active Rides Extract (multi-day)
 ## Two new files:
 
-### scooter_extract-2019-09-09.csv
+### scooter_extract-2019-07-22-through-2019-09-09.csv
 Contains data across all scooter extracts from 7-20 to 9-9. For each parked scooter, I've captured the first and last extract date for each unique combination of sumd_id, availability_start_date, availability_start_time and company_name. Combined with the file: extract_schedule.csv a user could recreate any extract.
 
 SQL example:
@@ -72,7 +72,7 @@ Python example:
 ```python
 import pandas as pd
 
-df = pd.read_csv('scooter_extract-2019-09-09.csv')
+df = pd.read_csv('scooter_extract-2019-07-22-through-2019-09-09.csv')
 extract_date = '2019-08-18 08:30:11'
 mask = ((df['first_extract_date_cst'] + ' ' + df['first_extract_time_cst']  <= extract_date) &  (df['last_extract_date_cst'] + ' ' + df['last_extract_time_cst']  >= extract_date))
 df[mask]
