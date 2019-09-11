@@ -29,9 +29,6 @@ CSV columns:
 - 'extract_date_utc': Modified, extract_date UTC
 - 'extract_time_utc': Modified, extract_time UTC
 
-### Concerns
-- some data appears missing from some days of data (e.g. 2019-07-24 and 2019-08-05)
-
 ## Sample Import Script
 
 ```python
@@ -115,3 +112,6 @@ One record for each extract, use this as a reference to recreate extracts.
 This represents the raw extract data except for two issues:
 1. If the scooter had been available for 10 or more days at the same location, I stopped updating it unless something changed (this helped speed up processing time)
 2. There were 20-80 **Bird** scooters that would disappear from the extracts, but then reappear in the same location several extracts later with the same availability start date and time. I decided to keep the records in the dataset because theoretically the scooters did not move and the availability 'clock' continued to tick from the original drop-off time, suggesting they were not moved, charged or ridden. This was specific to Bird.
+
+### Data Concerns
+- some data appears missing from some days of data (e.g. 2019-07-24 and 2019-08-09)
