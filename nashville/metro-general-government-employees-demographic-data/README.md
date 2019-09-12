@@ -3,7 +3,7 @@
 - However, they only keep the latest quarter, so I had to request the history.
 - The raw-xlsx were sent as attachments in a public records request email.
 - The csv's are simply the raw-xlsx converted from xlsx (and renamed for brevity).
-- The `quarterly` csv has the whole history in a single csv.
+- Going forward, we can copy the csv's from the website instead of the XLSX documents.
 
 # Concerns
 - Some files came with an additional County Field (last column). Those have been left blank where missing.
