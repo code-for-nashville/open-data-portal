@@ -1,8 +1,13 @@
 # Nashville Shared Urban Mobility Device (SUMD) Parking Compliance
 
-Source:
+# Source:
 https://data.nashville.gov/browse?tags=scooter&utf8=%E2%9C%93
 
+There are two kinds of datasets to work with:
+- Simple Extract (one day)
+- Active Rides Extract (multi-day)
+
+# Simple Extract (one day)
 CSV columns:
 - 'availability_duration': From original, duration of the parked device's availability (HH:MM:SS) UTC
 - 'availability_start_date': From original, date of the parked device's availability (YYYY-MM-DD) UTC
@@ -51,3 +56,62 @@ You can run it from this directory with `python ./script/extract`.
 This will extract current data into a scooters.db sqlite database.
 From there, you could you use it via python or sqlite.
 
+
+# Active Rides Extract (multi-day)
+## Two new files:
+
+### scooter_extract-2019-07-22-through-2019-09-09.csv
+Contains data across all scooter extracts from 7-20 to 9-9. For each parked scooter, I've captured the first and last extract date for each unique combination of sumd_id, availability_start_date, availability_start_time and company_name. Combined with the file: extract_schedule.csv a user could recreate any extract.
+
+SQL example:
+```sql
+select * from scooters where '2019-08-18 08:30:11' between first_extract_date_cst || ' ' || first_extract_time_cst and last_extract_date_cst || ' ' || last_extract_time_cst; 
+```
+
+Python example:
+```python
+import pandas as pd
+
+df = pd.read_csv('scooter_extract-2019-07-22-through-2019-09-09.csv')
+extract_date = '2019-08-18 08:30:11'
+mask = ((df['first_extract_date_cst'] + ' ' + df['first_extract_time_cst']  <= extract_date) &  (df['last_extract_date_cst'] + ' ' + df['last_extract_time_cst']  >= extract_date))
+df[mask]
+```
+
+#### Columns:
+- **'availability_duration'**: company supplied timing (do not use)
+- **'availability_start_date'**: when the scooter was parked/dropped off and ready for a rider, timezone = UTC
+- **'availability_start_time'**: parked time in UTC
+- **'company_name'**
+- **'company_phone'**
+- **'company_website'**
+- **'gps_latitude'**: latitude of parked scooter
+- **'gps_longitude'**: longitude of parked scooter
+- **'real_time_fare'**: cost per minute
+- **'sumd_group'**: Scooter or scooter
+-  **'sumd_id**': unique identifier for a device/scooter
+-  **'sumd_type'**: device type (all scooters)
+- **'availability_start_date_cst'**:start date converted to local cst time
+- **'availability_start_time_cst'**,
+- **'availability_duration_seconds'**: calculated seconds between availability_start_date/time and extract date/time
+- **'last_extract_date_cst'**: final extract on which this scooter appeared at this availability start date/time based on CST
+- **'last_extract_time_cst'**: final extract on which this scooter appeared at this availability start date/time based on CST
+- **'last_extract_date_utc'**: final extract on which this scooter appeared at this availability start date/time based on UTC
+- **'last_extract_time_utc'v: final extract on which this scooter appeared at this availability start date/time based on UTC
+- **'first_extract_date_cst':** first extract on which this device appeared with this availability start/datetime based on cst
+- **'first_extract_time_cst'**: first extract on which this device appeared with this availability start/datetime based on cst
+- **'first_extract_date_utc'**
+- **'first_extract_time_utc'**
+
+
+### extract_schedule.csv
+Column: extract_datetime_cst
+One record for each extract, use this as a reference to recreate extracts.
+
+### Notes
+This represents the raw extract data except for two issues:
+1. If the scooter had been available for 10 or more days at the same location, I stopped updating it unless something changed (this helped speed up processing time)
+2. There were 20-80 **Bird** scooters that would disappear from the extracts, but then reappear in the same location several extracts later with the same availability start date and time. I decided to keep the records in the dataset because theoretically the scooters did not move and the availability 'clock' continued to tick from the original drop-off time, suggesting they were not moved, charged or ridden. This was specific to Bird.
+
+### Data Concerns
+- some data appears missing from some days of data (e.g. 2019-07-24 and 2019-08-09)
