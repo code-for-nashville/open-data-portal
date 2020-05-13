@@ -8,9 +8,15 @@
 # Concerns
 - Some files came with an additional County Field (last column). Those have been left blank where missing.
 - Some files came with a `#` in the `Class Field` name (header only) and others with a `.`. 
-- Otherwise, all files appear to have the same columns with same names etc.
+- Most files appear to have the same columns with same names etc.
 - All files had 0-padded mm/dd/yyy dates except 2016-01, which dropped leading 0's.
 - Quarters 2015-07, 2015-01 and all 2014 are missing.
+
+## Specific Files
+
+| file    | Ethnic Code | EEO Job Category |
+|---------|-------------|------------------|
+| 2020-01 | Missing     | Missing          |
 
 [open-data-portal]: https://data.nashville.gov/General-Government/General-Government-Employees-Demographics/4ibi-mxs4
 
