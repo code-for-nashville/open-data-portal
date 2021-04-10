@@ -11,6 +11,7 @@ To execute the get-data script, change to the scripts directory, and use the fol
 command:
 
 <code>cd scripts</code>
+
 <code>node clean-data.js --outputFile=test.csv</code>
 
 Where <code>--outputFile</code> is set equal to a file name that will be created in the
@@ -22,6 +23,8 @@ the code will use the default value of https://data.nashville.gov/resource/4ibi-
 To execute the clean-data script, change to the scripts directors, and use the following command:
 
 <code>cd scripts</code>
-<code>node clean-data.js --templateFile=2020-08.csv --downloadedFile=General_Government_Employees_Demographics.csv --outputFile=2021-01.csv</code>
+
+<code>node clean-data.js --templateFile=2020-08.csv
+--downloadedFile=General_Government_Employees_Demographics.csv --outputFile=2021-01.csv</code>
 
 Where <code>--templateFile=</code> is set equal to an already cleaned data file from the past that the script can use as a template; <code>--downloadedFile=</code> is set equal to the name of the file downloaded from data.nashville.gov (note: the script expects this file to be saved in the <code>../local</code> directory); and the <code>--outputFile=</code> is set equal to the name of the file that should be created to be stored in this open data portal.
