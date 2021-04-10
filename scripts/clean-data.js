@@ -1,3 +1,7 @@
+// 
+// example useage from the command prompt:
+// node clean-data.js --templateFile=2020-08.csv --downloadedFile=General_Government_Employees_Demographics.csv --outputFile=2021-01.csv
+// 
 const df = require('data-forge');
 require('data-forge-fs');
 const hf = require('./helperFunctions.js');

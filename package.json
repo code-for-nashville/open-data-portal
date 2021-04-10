@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "data-forge": "^1.8.15",
-    "data-forge-fs": "0.0.9"
+    "data-forge-fs": "0.0.9",
+    "request": "^2.88.2"
   }
 }
